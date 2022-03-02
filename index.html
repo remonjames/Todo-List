@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+  <title>Todo-List</title>
+</head>
+
+<body>
+  <header>
+    <h1>Todo List</h1>
+  </header>
+  <main>
+    <nav id="nav" class="sidebar">
+      <div class="default-projects">
+        <ul>
+          <li>
+            <span class="material-icons-outlined">task_alt</span>
+            <span>Tasks</span>
+          </li>
+          <li>
+            <span class="material-icons-outlined">calendar_today</span>
+            <span>Today</span>
+          </li>
+          <li>
+            <span class="material-icons-outlined">grade</span>
+            <span>Important</span>
+          </li>
+        </ul>
+      </div>
+      <h2 class="projectsHeading">Projects</h2>
+      <div class="projects">
+
+        <ul>
+          <li>
+            <span class="material-icons-outlined">list</span>
+            <span>The Odin Project</span>
+          </li>
+        </ul>
+        <button id="openNewProjectModalBtn">
+          <span class="material-icons-outlined">add</span>
+          <span>New Project</span>
+        </button>
+      </div>
+    </nav>
+
+    <section id="content">
+      <button id="openNewTodoModalBtn" class="material-icons-outlined">add_circle</button>
+    </section>
+  </main>
+
+
+  <footer>
+    <p>The Odin Project</p>
+  </footer>
+
+  <!-- Modal -->
+  <div id="newTodoModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <span id='newTodoCloseBtn' class="modal-closeBtn">&times;</span>
+        <h2>New Task</h2>
+      </div>
+      <div class="modal-body">
+        <form action="submit" id="newTodoModalForm" class="modal-form">
+          <input id="newTodoTitle" type="text" placeholder="title" required>
+
+          <textarea id="newTodoDescription" name="description" rows="5" cols="33" placeholder="description"
+            required></textarea>
+
+          <ul class="modal-form-bottom">
+            <li>
+              <label for="newTodoDate">Due Date</label>
+              <input type="date" name="dueDate" id="newTodoDate">
+            </li>
+            <li>
+              <input id="priority" class="starCheckbox material-icons-outlined" type="checkbox" name="priority"
+                value="important">
+              <label for="priority">Important</label>
+            </li>
+
+            <li><button id="addNewTodoBtn" type="submit">Add New task</button></li>
+          </ul>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div id="newProjectModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <span id='newProjectCloseBtn' class="modal-closeBtn">&times;</span>
+        <h2>New Project</h2>
+      </div>
+      <div class="modal-body">
+        <form class="modal-form" action="submit">
+          <input id="newProjectTitle" type="text" placeholder="Project name">
+          <button id="addNewProjectBtn">Add New Project</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script src="main.js"></script>
+</body>
+
+</html>
