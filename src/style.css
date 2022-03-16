@@ -1,4 +1,6 @@
-* {
+*,
+*::before,
+*::after {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
@@ -59,7 +61,7 @@ nav {
 }
 
 .projectsHeading {
-    font-size: 2.25rem;
+    font-size: 2rem;
     margin-left: 25px;
 }
 
@@ -67,9 +69,24 @@ nav {
     list-style: none;
 } 
 
-.projects > ul > li,  
-.projects > button {
-    font-size: 1.5rem;
+.project {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 25px 25px 25px 25px;
+    font-size: 1.25rem;
+}
+
+.project > div {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+}
+
+.projects  button {
+    font-size: 1.25rem;
     display: flex;
     align-items: center;
     gap: 20px;
@@ -87,11 +104,82 @@ nav {
 
 #content {
     grid-column: 2 / 3;
+    width: calc(100vw - 300px);
+    padding: 20px;
 }
 
-#openNewTodoModalBtn {
+#content h2 {
+    font-size: 2.25rem;
+    margin-bottom: 25px;
+}
+
+#tasksList {
+    list-style: none;
+}
+
+#tasksList > li {
+    background-color: #2a52be;
+    border: 1px solid black;
+    border-radius: 20px;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 20px;
+    color: white;
+}
+
+.taskLeftSide {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.taskRightSide {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.taskText {
+    display: flex;
+    flex-direction: column;
+}
+
+.taskText input {
+    border: none;
+    background: none;
+    font-size: 1.25rem;
+    color: white;
+}
+
+
+.taskRightSide input {
+    color: white;
+    border: none;
+    background: none;
+    font-size: 1rem;
+}
+
+.taskText input + input {
+    font-size: 0.8rem;
+}
+
+.taskDueDate {
+    font-size: .9rem;
+    border: 1px solid black;
+    padding: 5px;
+    border-radius: 10px;
+    width: 100px;
+    text-align: center;
+}
+
+
+#openNewTaskModalBtn {
     border-radius: 50%;
     border: none;
+    display: none;
     background-color: white;
     font-size: 3.5rem;
     position: fixed;
@@ -130,9 +218,11 @@ footer p {
 }
 
 .modal-content {
-    background-color: white;
+    background-color: #1D3557;
     margin: 20% auto;
     width: 450px;
+    border-radius: 7px;
+    border: none;
 }
 
 .modal-header {
@@ -140,6 +230,9 @@ footer p {
     padding: 20px;
     color: white;
     font-size: 1.25rem;
+    border-top-right-radius: 7px;
+    border-top-left-radius: 7px;
+    border: none;
 }
 
 .modal-closeBtn {
@@ -164,15 +257,17 @@ footer p {
     font-size: 1rem;
 }
 
-#newTodoTitle {
+#newTaskTitle {
     font-size: 1rem;
     border: 1px solid lightgray;
+    border-radius: 3px;
 } 
 
-#newTodoDescription {
+#newTaskDescription {
     resize: none;
     font-size: 1rem;
     border: 1px solid lightgray;
+    border-radius: 3px;
 }
 
 .modal-form-bottom {
@@ -187,36 +282,37 @@ footer p {
     gap: 5px;
 }
 
-#newTodoDate {
+.modal-form-bottom li label {
+    color: white;
+}
+
+#newTaskDate {
     font-size: 0.9rem;
+    border: none;
+    border-radius: 3px;
 }
 
 .starCheckbox {
     visibility:hidden;
-    font-size: 1.1rem;
+    font-size: 1rem;
     cursor:pointer;
 }
-.starCheckbox::before,
-.starCheckbox::after {
-   content: "grade";
+
+.starCheckbox::before {
+   content: "star_outline";
    position: absolute;
    visibility:visible;
+   color: white;
 }
 
-.starCheckbox:checked::after {
+.starCheckbox:checked::before {
    content: "star";
    position: absolute;
    color: yellow;
 }
 
-.starCheckbox:checked::before{
-    content: "star";
-    position: absolute;
-    color: black;
-    font-size: 1.15rem;
- }
 
-#addNewTodoBtn {
+#addNewTaskBtn {
     border: none;
     padding: 5px 10px;
     background-color: #457B9D;
