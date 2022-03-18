@@ -68,7 +68,7 @@ function todolist() {
             projectsList.appendChild(projectBtn);
 
 
-            projectBtnDiv.addEventListener('click', openProject);
+            projectBtn.addEventListener('click', openProject);
         },
 
         deleteProject(el) {
@@ -111,13 +111,13 @@ document.getElementById('newProjectModal').addEventListener('submit', (e) => {
 })
 
 //Event: Opening a Project
+
 function openProject(e) {
-    e.stopPropagation();
 
     activeProject = allProjects.filter(checkProjectTitle)[0];
 
     function checkProjectTitle(project) {
-        return project.title === e.currentTarget.lastElementChild.innerText;
+        return project.title === e.currentTarget.firstElementChild.lastElementChild.innerText;
     }
 
     const projectTitle = document.getElementById('projectTitle');
@@ -125,8 +125,24 @@ function openProject(e) {
     const openNewTaskModalBtn = document.getElementById('openNewTaskModalBtn');
     openNewTaskModalBtn.style.display = 'block';
 
+    showActiveProject(e);
+
+
     renderTasks();
 }
+
+// Show Active Project 
+function showActiveProject(e) {
+    let projects = Array.from(document.querySelectorAll('.project'));
+    projects.forEach((project) => {
+        project.classList.remove('activeProject');
+    })
+    e.currentTarget.classList.add('activeProject')
+}
+
+
+
+
 
 
 
@@ -247,7 +263,6 @@ document.getElementById('projectsList').addEventListener('click', (e) => {
 
         myTodolist.deleteProjectFromList(e.target.previousElementSibling.lastElementChild.textContent);
     }
-
 })
 
 //Event Remove Task

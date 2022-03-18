@@ -78,6 +78,15 @@ nav {
     align-items: center;
     padding: 25px 25px 25px 25px;
     font-size: 1.25rem;
+    cursor: pointer;
+}
+
+.project:hover {
+    background-color: #ceeec4;
+}
+
+.activeProject {
+    background-color: #ceeec4;
 }
 
 .project > div {
