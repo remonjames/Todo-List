@@ -65,6 +65,7 @@ nav {
 .projectsHeading {
     font-size: 2rem;
     margin-left: 25px;
+    margin-bottom: 20px;
 }
 
 .projects > ul {
@@ -110,6 +111,11 @@ nav {
     background-color: #F1FAEE;
 }
 
+.delete:hover {
+    color: red;
+    cursor: pointer;
+}
+
 
 /* MAIN CONTENT */
 
@@ -128,7 +134,7 @@ nav {
     list-style: none;
 }
 
-#tasksList > li {
+.task {
     background-color: #2a52be;
     border: 1px solid black;
     border-radius: 20px;
@@ -184,6 +190,16 @@ nav {
     border-radius: 10px;
     width: 100px;
     text-align: center;
+}
+
+.taskCompleted {
+    background-color: #6d8bdf;
+}
+
+.taskCompleted > .taskLeftSide > .taskText > input[type=text] {
+    text-decoration: line-through;
+    text-decoration-color: black;
+    color: #eee;
 }
 
 

@@ -26,13 +26,14 @@ function createProject(title) {
 }
 
 //Task Class
-function createTask(title, description, dueDate, priority) {
+function createTask(title, description, dueDate, priority, project) {
     return {
         title,
         description,
         dueDate,
         priority,
-        completed: false
+        completed: false,
+        project
     }
 }
 
@@ -129,6 +130,8 @@ function openProject(e) {
 
 
     renderTasks();
+
+    console.log(activeProject.tasks)
 }
 
 // Show Active Project 
@@ -141,7 +144,15 @@ function showActiveProject(e) {
 }
 
 
+//Event: Remove Project
 
+document.getElementById('projectsList').addEventListener('click', (e) => {
+    if (e.target.classList.contains('delete')) {
+        myTodolist.deleteProject(e.target);
+
+        myTodolist.deleteProjectFromList(e.target.previousElementSibling.lastElementChild.textContent);
+    }
+})
 
 
 
@@ -164,7 +175,7 @@ document.getElementById('newTaskModal').addEventListener('submit', (e) => {
     const newTaskPriority = document.getElementById('newTaskPriority');
 
 
-    const newTask = createTask(newTaskTitle.value, newTaskDescription.value, newTaskDate.value, newTaskPriority.checked);
+    const newTask = createTask(newTaskTitle.value, newTaskDescription.value, newTaskDate.value, newTaskPriority.checked, activeProject.title);
 
 
     //add new task to project
@@ -172,7 +183,6 @@ document.getElementById('newTaskModal').addEventListener('submit', (e) => {
         if (activeProject.title === project.title) {
             project.addTask(newTask);
             activeProject = project;
-            console.log(allProjects);
         }
     })
 
@@ -183,15 +193,17 @@ document.getElementById('newTaskModal').addEventListener('submit', (e) => {
 function renderTasks() {
     const tasksList = document.getElementById('tasksList');
     clearElements(tasksList);
-    activeProject.tasks.forEach(function (task) {
+    activeProject.tasks.forEach((task) => {
         const taskEntry = document.createElement('li');
         taskEntry.classList.add('task');
+
 
         const taskLeftSide = document.createElement('div');
         taskLeftSide.classList.add('taskLeftSide');
 
         const checkbox = document.createElement('input');
         checkbox.setAttribute('type', 'checkbox');
+        checkbox.classList.add('taskCompleteToggle');
         taskLeftSide.appendChild(checkbox);
 
         const taskText = document.createElement('div');
@@ -247,6 +259,12 @@ function renderTasks() {
 
         taskEntry.appendChild(taskRightSide);
 
+        if (task.completed) {
+            taskEntry.classList.add('taskCompleted');
+            checkbox.checked = true;
+        }
+
+
         const tasksList = document.getElementById('tasksList');
         tasksList.appendChild(taskEntry);
 
@@ -254,16 +272,6 @@ function renderTasks() {
     });
 }
 
-
-//Event: Remove Project
-
-document.getElementById('projectsList').addEventListener('click', (e) => {
-    if (e.target.classList.contains('delete')) {
-        myTodolist.deleteProject(e.target);
-
-        myTodolist.deleteProjectFromList(e.target.previousElementSibling.lastElementChild.textContent);
-    }
-})
 
 //Event Remove Task
 
@@ -275,6 +283,31 @@ document.getElementById('tasksList').addEventListener('click', (e) => {
         console.log(allProjects);
     }
 })
+
+//Mark Task as Completed
+document.getElementById('tasksList').addEventListener('click', (e) => {
+    if (e.target.classList.contains('taskCompleteToggle')) {
+        e.target.parentElement.parentElement.classList.toggle('taskCompleted');
+
+        let taskTitle = e.target.nextElementSibling.firstElementChild.value;
+        setCompletionStatus(activeProject.title, taskTitle, e.target.checked);
+    }
+    console.log(allProjects[0].tasks);
+
+})
+
+function setCompletionStatus(projectTitle, taskTitle, status) {
+    allProjects.forEach((project) => {
+        if (project.title === projectTitle) {
+            project.tasks.forEach((task) => {
+                if (task.title === taskTitle) {
+                    task.completed = status;
+                }
+            })
+        }
+    })
+}
+
 
 
 //Clean up tasks
