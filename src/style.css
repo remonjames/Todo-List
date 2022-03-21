@@ -104,11 +104,16 @@ nav {
     gap: 20px;
     padding: 25px 0 25px 25px;
     width: 100%;
+    cursor: pointer;
 }
 
-.projects > button {
+#openNewProjectModalBtn {
     border: none;
     background-color: #F1FAEE;
+}
+
+#openNewProjectModalBtn:hover {
+    background-color: #ceeec4;
 }
 
 .delete:hover {

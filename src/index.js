@@ -246,9 +246,6 @@ function renderTasks() {
             priorityToggler.checked = false;
         }
 
-        // priorityToggler.addEventListener('change', () => {
-        //     task.setPriority(priorityToggler.checked);
-        // })
         taskRightSide.appendChild(priorityToggler);
 
         const deleteBtn = document.createElement('span');
@@ -264,7 +261,6 @@ function renderTasks() {
             checkbox.checked = true;
         }
 
-
         const tasksList = document.getElementById('tasksList');
         tasksList.appendChild(taskEntry);
 
@@ -272,6 +268,16 @@ function renderTasks() {
     });
 }
 
+// Change Task Priority
+document.getElementById('tasksList').addEventListener('change', (e) => {
+    if (e.target.classList.contains('starCheckbox')) {
+        let taskTitle = e.target.parentElement.previousElementSibling.lastElementChild.firstElementChild.value;
+        let task = findTask(activeProject.title, taskTitle);
+        task.priority = e.target.checked;
+        console.log(task);
+    }
+    console.log(allProjects[0].tasks);
+})
 
 //Event Remove Task
 
@@ -290,22 +296,25 @@ document.getElementById('tasksList').addEventListener('click', (e) => {
         e.target.parentElement.parentElement.classList.toggle('taskCompleted');
 
         let taskTitle = e.target.nextElementSibling.firstElementChild.value;
-        setCompletionStatus(activeProject.title, taskTitle, e.target.checked);
-    }
-    console.log(allProjects[0].tasks);
+        let task = findTask(activeProject.title, taskTitle);
+        task.completed = e.target.checked;
 
+    }
 })
 
-function setCompletionStatus(projectTitle, taskTitle, status) {
+function findTask(projectTitle, taskTitle) {
+    let myTask;
     allProjects.forEach((project) => {
+
         if (project.title === projectTitle) {
             project.tasks.forEach((task) => {
                 if (task.title === taskTitle) {
-                    task.completed = status;
+                    myTask = task;
                 }
             })
         }
     })
+    return myTask;
 }
 
 
