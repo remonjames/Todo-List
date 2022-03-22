@@ -41,6 +41,7 @@ function createTask(title, description, dueDate, priority, project) {
 function todolist() {
 
     return {
+        tasks: [],
         addProjectToList(project) {
             const projectsList = document.getElementById('projectsList');
 
@@ -129,7 +130,7 @@ function openProject(e) {
     showActiveProject(e);
 
 
-    renderTasks();
+    renderTasks(activeProject);
 
     console.log(activeProject.tasks)
 }
@@ -151,17 +152,18 @@ document.getElementById('projectsList').addEventListener('click', (e) => {
         myTodolist.deleteProject(e.target);
 
         myTodolist.deleteProjectFromList(e.target.previousElementSibling.lastElementChild.textContent);
+
+        const projectTitle = document.getElementById('projectTitle');
+        projectTitle.innerText = '';
+        clearElements(document.getElementById('tasksList'))
     }
 })
-
-
 
 
 //Event: Add Task
 const openNewTaskModalBtn = document.getElementById('openNewTaskModalBtn');
 
 openNewTaskModalBtn.addEventListener('click', openTaskModal);
-
 
 document.getElementById('newTaskModal').addEventListener('submit', (e) => {
     e.preventDefault();
@@ -177,7 +179,6 @@ document.getElementById('newTaskModal').addEventListener('submit', (e) => {
 
     const newTask = createTask(newTaskTitle.value, newTaskDescription.value, newTaskDate.value, newTaskPriority.checked, activeProject.title);
 
-
     //add new task to project
     allProjects.forEach((project) => {
         if (activeProject.title === project.title) {
@@ -186,17 +187,16 @@ document.getElementById('newTaskModal').addEventListener('submit', (e) => {
         }
     })
 
-    renderTasks();
+    renderTasks(activeProject);
 })
 
 //render Tasks
-function renderTasks() {
+function renderTasks(project) {
     const tasksList = document.getElementById('tasksList');
     clearElements(tasksList);
-    activeProject.tasks.forEach((task) => {
+    project.tasks.forEach((task) => {
         const taskEntry = document.createElement('li');
         taskEntry.classList.add('task');
-
 
         const taskLeftSide = document.createElement('div');
         taskLeftSide.classList.add('taskLeftSide');
@@ -318,7 +318,6 @@ function findTask(projectTitle, taskTitle) {
 }
 
 
-
 //Clean up tasks
 
 function clearElements(element) {
@@ -327,6 +326,25 @@ function clearElements(element) {
     }
 }
 
+
+// //Show all tasks
+// document.getElementById('allTasks').addEventListener('click', showAllTasks);
+
+// function showAllTasks() {
+//     todolist.tasks = [];
+//     document.getElementById('projectTitle').innerText = 'All Tasks';
+
+//     allProjects.forEach((project) => {
+//         todolist.tasks = todolist.tasks.concat(project.tasks);
+//     })
+
+//     renderTasks(todolist);
+
+//     console.log(todolist.tasks)
+// }
+
+// //Show tasks due TODAY
+// document.getElementById('tasksDueToday').addEventListener('click', showTasksDueToday);
 
 
 //New Project Modal

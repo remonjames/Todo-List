@@ -49,7 +49,7 @@ nav {
     width: 300px;
 }
 
-.default-projects > ul {
+/* .default-projects > ul {
     list-style: none;
 }
 
@@ -60,10 +60,11 @@ nav {
     gap: 20px;
     padding: 25px 0 25px 25px;
     width: 100%;
-}
+} */
 
 .projectsHeading {
     font-size: 2rem;
+    margin-top: 20px;
     margin-left: 25px;
     margin-bottom: 20px;
 }
@@ -156,6 +157,7 @@ nav {
     display: flex;
     gap: 20px;
     align-items: center;
+    width: 600px;
 }
 
 .taskRightSide {
@@ -174,6 +176,7 @@ nav {
     background: none;
     font-size: 1.25rem;
     color: white;
+    width: 500px;
 }
 
 
