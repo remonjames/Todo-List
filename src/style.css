@@ -192,6 +192,7 @@ nav {
 }
 
 .taskDueDate {
+    font-family: 'Roboto', sans-serif;
     font-size: .9rem;
     border: 1px solid black;
     padding: 5px;
@@ -255,7 +256,7 @@ footer p {
 .modal-content {
     background-color: #1D3557;
     margin: 20% auto;
-    width: 450px;
+    width: 550px;
     border-radius: 7px;
     border: none;
 }
@@ -300,6 +301,7 @@ footer p {
 
 #newTaskDescription {
     resize: none;
+    font-family: 'Roboto', sans-serif;
     font-size: 1rem;
     border: 1px solid lightgray;
     border-radius: 3px;
@@ -322,28 +324,32 @@ footer p {
 }
 
 #newTaskDate {
+    font-family: 'Roboto', sans-serif;
     font-size: 0.9rem;
     border: none;
     border-radius: 3px;
 }
 
 .starCheckbox {
-    visibility:hidden;
+    visibility: hidden;
     font-size: 1rem;
-    cursor:pointer;
+    cursor: pointer;
+    -moz-appearance: inherit;
 }
 
 .starCheckbox::before {
    content: "star_outline";
-   position: absolute;
-   visibility:visible;
+   position: relative;
+   visibility: visible;
    color: white;
+   -moz-appearance: inherit;
 }
 
 .starCheckbox:checked::before {
    content: "star";
-   position: absolute;
+   position: relative;
    color: yellow;
+   -moz-appearance: inherit;
 }
 
 
