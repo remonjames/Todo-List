@@ -213,12 +213,14 @@ function renderTasks(project) {
         taskTitle.type = 'text';
         taskTitle.value = task.title;
         taskTitle.setAttribute('readonly', true);
+        taskTitle.classList.add('taskTitle');
         taskText.appendChild(taskTitle);
 
         const taskDescription = document.createElement('input');
         taskDescription.type = 'text';
         taskDescription.value = task.description;
         taskDescription.setAttribute('readonly', true);
+        taskDescription.classList.add('taskDescription');
         taskText.appendChild(taskDescription);
 
         taskLeftSide.appendChild(taskText);
@@ -231,11 +233,6 @@ function renderTasks(project) {
         taskDueDate.type = 'date';
         taskDueDate.value = task.dueDate;
         taskRightSide.appendChild(taskDueDate);
-
-        const editBtn = document.createElement('span');
-        editBtn.innerText = 'edit';
-        editBtn.classList.add('material-icons-outlined');
-        taskRightSide.appendChild(editBtn);
 
         let priorityToggler = document.createElement('input');
         priorityToggler.type = 'checkbox';
@@ -268,15 +265,58 @@ function renderTasks(project) {
     });
 }
 
+//Edit Task Title
+
+
+document.getElementById('tasksList').addEventListener('click', (e) => {
+
+    let oldTaskTitle = "";
+
+    if (e.target.classList.contains('taskTitle')) {
+        e.target.classList.add('editTaskText');
+        e.target.removeAttribute('readonly');
+        oldTaskTitle = e.target.value;
+
+        e.target.onblur = function () {
+            if (e.target.classList.contains('taskTitle')) {
+                let task = findTask(activeProject.title, oldTaskTitle);
+                task.title = e.target.value;
+            }
+            e.target.classList.remove('editTaskText');
+            e.target.setAttribute('readonly', true);
+        }
+    }
+})
+
+//Edit Task Description
+
+document.getElementById('tasksList').addEventListener('click', (e) => {
+
+
+    if (e.target.classList.contains('taskDescription')) {
+        e.target.classList.add('editTaskText');
+        e.target.removeAttribute('readonly');
+
+        e.target.onblur = function () {
+            if (e.target.classList.contains('taskDescription')) {
+                let taskTitle = e.target.parentElement.firstElementChild.value;
+                let task = findTask(activeProject.title, taskTitle);
+                task.description = e.target.value;
+            }
+            e.target.classList.remove('editTaskText');
+            e.target.setAttribute('readonly', true);
+        }
+    }
+})
+
+
 // Change Task Priority
 document.getElementById('tasksList').addEventListener('change', (e) => {
     if (e.target.classList.contains('starCheckbox')) {
         let taskTitle = e.target.parentElement.previousElementSibling.lastElementChild.firstElementChild.value;
         let task = findTask(activeProject.title, taskTitle);
         task.priority = e.target.checked;
-        console.log(task);
     }
-    console.log(allProjects[0].tasks);
 })
 
 //Event Remove Task
@@ -286,7 +326,6 @@ document.getElementById('tasksList').addEventListener('click', (e) => {
         activeProject.deleteTask(e.target);
 
         activeProject.deleteTaskFromList(e.target.parentElement.previousElementSibling.lastElementChild.firstElementChild.value);
-        console.log(allProjects);
     }
 })
 
@@ -325,26 +364,6 @@ function clearElements(element) {
         element.removeChild(element.firstChild);
     }
 }
-
-
-// //Show all tasks
-// document.getElementById('allTasks').addEventListener('click', showAllTasks);
-
-// function showAllTasks() {
-//     todolist.tasks = [];
-//     document.getElementById('projectTitle').innerText = 'All Tasks';
-
-//     allProjects.forEach((project) => {
-//         todolist.tasks = todolist.tasks.concat(project.tasks);
-//     })
-
-//     renderTasks(todolist);
-
-//     console.log(todolist.tasks)
-// }
-
-// //Show tasks due TODAY
-// document.getElementById('tasksDueToday').addEventListener('click', showTasksDueToday);
 
 
 //New Project Modal
