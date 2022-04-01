@@ -147,15 +147,17 @@ nav {
     width: 600px;
 }
 
-.taskRightSide {
-    display: flex;
-    align-items: center;
-    gap: 5px;
+.taskCompleteToggle {
+    cursor: pointer;
 }
 
 .taskText {
     display: flex;
     flex-direction: column;
+}
+
+.taskText input + input {
+    font-size: 0.8rem;
 }
 
 .taskTitle, .taskDescription {
@@ -164,11 +166,18 @@ nav {
     font-size: 1.25rem;
     color: white;
     width: 500px;
+    cursor: pointer;
 }
 
 .editTaskText {
     background-color: white;
     color: black;
+}
+
+.taskRightSide {
+    display: flex;
+    align-items: center;
+    gap: 20px;
 }
 
 
@@ -179,9 +188,7 @@ nav {
     font-size: 1rem;
 }
 
-.taskText input + input {
-    font-size: 0.8rem;
-}
+
 
 .taskDueDate {
     font-family: 'Roboto', sans-serif;
@@ -191,6 +198,7 @@ nav {
     border-radius: 10px;
     width: 100px;
     text-align: center;
+    cursor: pointer;
 }
 
 .taskCompleted {
@@ -229,6 +237,7 @@ footer {
 footer p {
     color: #F1FAEE;
     text-align: center;
+    font-size: 1.25em;
 }
 
 /* NEW TODO MODAL */
@@ -320,6 +329,7 @@ footer p {
     font-size: 0.9rem;
     border: none;
     border-radius: 3px;
+    cursor: pointer;
 }
 
 .starCheckbox {
@@ -352,6 +362,7 @@ footer p {
     color: white;
     border-radius: 7px;
     font-size: 1rem;
+    cursor: pointer;
 }
 
 /* NEW PROJECT MODAL */
@@ -369,4 +380,5 @@ footer p {
     color: white;
     font-size: 1rem;
     align-self: center;
+    cursor: pointer;
 }

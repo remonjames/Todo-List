@@ -129,10 +129,7 @@ function openProject(e) {
 
     showActiveProject(e);
 
-
     renderTasks(activeProject);
-
-    console.log(activeProject.tasks)
 }
 
 // Show Active Project 
@@ -232,6 +229,7 @@ function renderTasks(project) {
         const taskDueDate = document.createElement('input');
         taskDueDate.type = 'date';
         taskDueDate.value = task.dueDate;
+        taskDueDate.classList.add('taskDueDate');
         taskRightSide.appendChild(taskDueDate);
 
         let priorityToggler = document.createElement('input');
@@ -309,8 +307,18 @@ document.getElementById('tasksList').addEventListener('click', (e) => {
     }
 })
 
+//Edit Task Due Date
+document.getElementById('tasksList').addEventListener('change', (e) => {
+    if (e.target.classList.contains('taskDueDate')) {
+        let taskTitle = e.target.parentElement.previousElementSibling.lastElementChild.firstElementChild.value;
+        let task = findTask(activeProject.title, taskTitle);
+        task.dueDate = e.target.value;
+    }
+})
 
-// Change Task Priority
+
+
+// Toggle Task Priority
 document.getElementById('tasksList').addEventListener('change', (e) => {
     if (e.target.classList.contains('starCheckbox')) {
         let taskTitle = e.target.parentElement.previousElementSibling.lastElementChild.firstElementChild.value;
